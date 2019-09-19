@@ -87,27 +87,36 @@ func TestGroupCRUD(t *testing.T) {
 			assert.Equal(ParticipantRoleMember, group.Role)
 			new, _ = ReadGroup(mctx, group.GroupID, nil)
 			assert.Equal(int64(2), new.UsersCount)
+
 			users, err = group.Participants(mctx, nil, time.Now(), "100")
+			assert.Nil(err)
 			assert.Len(users, 2)
+
 			err = new.UpdateParticipant(mctx, user, jason.UserID, ParticipantRoleAdmin)
 			assert.Nil(err)
+
 			group, err = jason.ExitGroup(mctx, group.GroupID)
 			assert.Nil(err)
 			assert.Equal(ParticipantRoleGuest, group.Role)
+
 			new, _ = ReadGroup(mctx, group.GroupID, nil)
 			assert.Equal(int64(1), new.UsersCount)
+
 			users, err = group.Participants(mctx, nil, time.Now(), "100")
 			assert.Len(users, 1)
 
 			invitation, err := user.CreateGroupInvitation(mctx, uuid.Must(uuid.NewV4()).String(), "test@gmail.com")
 			assert.Nil(err)
 			assert.Nil(invitation)
+
 			invitation, err = jason.CreateGroupInvitation(mctx, group.GroupID, david.Email.String)
 			assert.NotNil(err)
 			assert.Nil(invitation)
+
 			invitation, err = user.CreateGroupInvitation(mctx, group.GroupID, jason.Email.String)
 			assert.Nil(err)
 			assert.Nil(invitation)
+
 			users, err = group.Participants(mctx, nil, time.Now(), "100")
 			assert.Len(users, 2)
 		})
