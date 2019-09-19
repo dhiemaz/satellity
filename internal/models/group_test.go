@@ -103,6 +103,7 @@ func TestGroupCRUD(t *testing.T) {
 			assert.Equal(int64(1), new.UsersCount)
 
 			users, err = group.Participants(mctx, nil, time.Now(), "100")
+			assert.Nil(err)
 			assert.Len(users, 1)
 
 			invitation, err := user.CreateGroupInvitation(mctx, uuid.Must(uuid.NewV4()).String(), "test@gmail.com")
@@ -118,6 +119,7 @@ func TestGroupCRUD(t *testing.T) {
 			assert.Nil(invitation)
 
 			users, err = group.Participants(mctx, nil, time.Now(), "100")
+			assert.Nil(err)
 			assert.Len(users, 2)
 		})
 	}
