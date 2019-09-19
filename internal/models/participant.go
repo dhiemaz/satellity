@@ -229,6 +229,7 @@ func (g *Group) Participants(mctx *Context, current *User, offset time.Time, lim
 	return users, nil
 }
 
+// UpdateParticipant update participant role
 func (g *Group) UpdateParticipant(mctx *Context, current *User, id, role string) error {
 	ctx := mctx.context
 	switch role {

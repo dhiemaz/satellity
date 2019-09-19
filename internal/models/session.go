@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS sessions (
 CREATE INDEX ON sessions (user_id);
 `
 
-// Session contains user's current login infomation
+// Session contains user's current login information
 type Session struct {
 	SessionID string    `sql:"session_id,pk"`
 	UserID    string    `sql:"user_id"`

@@ -358,6 +358,10 @@ func updateGroupUsercount(ctx context.Context, tx *sql.Tx, group *Group, increas
 		group.UsersCount = count + 1
 	}
 	_, err = tx.ExecContext(ctx, "UPDATE groups SET users_count=$1 WHERE group_id=$2", group.UsersCount, group.GroupID)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 

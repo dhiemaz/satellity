@@ -60,7 +60,7 @@ func (impl *commentImpl) update(w http.ResponseWriter, r *http.Request, params m
 	}
 }
 
-func (impl *commentImpl) destory(w http.ResponseWriter, r *http.Request, params map[string]string) {
+func (impl *commentImpl) destroy(w http.ResponseWriter, r *http.Request, params map[string]string) {
 	mctx := models.WrapContext(r.Context(), impl.database)
 	if err := middlewares.CurrentUser(r).DeleteComment(mctx, params["id"]); err != nil {
 		views.RenderErrorResponse(w, r, err)

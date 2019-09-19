@@ -202,7 +202,7 @@ func (g *Group) ReadMessages(mctx *Context, offset time.Time) ([]*Message, error
 }
 
 // UpdateMessage update a message by id
-func (user *User) UpdateMessage(mctx *Context, id, body string) (*Message, error) {
+func (u *User) UpdateMessage(mctx *Context, id, body string) (*Message, error) {
 	ctx := mctx.context
 	var message *Message
 	err := mctx.database.RunInTransaction(ctx, func(tx *sql.Tx) error {
@@ -236,7 +236,7 @@ func (user *User) UpdateMessage(mctx *Context, id, body string) (*Message, error
 }
 
 // DeleteMessage delete a message by id
-func (user *User) DeleteMessage(mctx *Context, id string) error {
+func (u *User) DeleteMessage(mctx *Context, id string) error {
 	ctx := mctx.context
 	err := mctx.database.RunInTransaction(ctx, func(tx *sql.Tx) error {
 		message, err := findMessageByID(ctx, tx, id)

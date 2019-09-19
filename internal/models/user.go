@@ -19,8 +19,8 @@ import (
 )
 
 const (
-	UserRoleAdmin  = "admin"
-	UserRoleMember = "member"
+	userRoleAdmin  = "admin"
+	userRoleMember = "member"
 )
 
 const usersDDL = `
@@ -319,9 +319,9 @@ func findUserByIdentity(ctx context.Context, tx *sql.Tx, identity string) (*User
 // Role of an user, contains admin and member for now.
 func (u *User) Role() string {
 	if configs.AppConfig.OperatorSet[u.Email.String] {
-		return UserRoleAdmin
+		return userRoleAdmin
 	}
-	return UserRoleMember
+	return userRoleMember
 }
 
 // Name is nickname or username
@@ -333,7 +333,7 @@ func (u *User) Name() string {
 }
 
 func (u *User) isAdmin() bool {
-	return u.Role() == UserRoleAdmin
+	return u.Role() == userRoleAdmin
 }
 
 func findUserByID(ctx context.Context, tx *sql.Tx, id string) (*User, error) {

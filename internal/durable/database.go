@@ -10,6 +10,7 @@ import (
 	_ "github.com/lib/pq" //
 )
 
+// ConnectionInfo database
 type ConnectionInfo struct {
 	User     string
 	Password string

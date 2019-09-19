@@ -8,9 +8,11 @@ import (
 )
 
 const (
+	// BuildVersion application
 	BuildVersion = "BUILD_VERSION"
 )
 
+// Option application
 type Option struct {
 	Name string `yaml:"name"`
 	HTTP struct {
@@ -40,8 +42,9 @@ type Option struct {
 	OperatorSet map[string]bool
 }
 
-var AppConfig *Option
+var appConfig *Option
 
+// Init application
 func Init(dir, env string) error {
 	data, err := ioutil.ReadFile(path.Join(dir, "./config.yaml"))
 	if err != nil {
@@ -59,6 +62,6 @@ func Init(dir, env string) error {
 	for _, operator := range opt.Operators {
 		opt.OperatorSet[operator] = true
 	}
-	AppConfig = &opt
+	appConfig = &opt
 	return nil
 }
